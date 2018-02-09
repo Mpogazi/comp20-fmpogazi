@@ -1,0 +1,37 @@
+@media only screen 
+	and (min-device-width: 1200px) {
+		.k8em0 {
+			width: 600px;
+			height: 600px;
+			background: url(k8em0.jpg) 0px 0px;
+		}
+
+	}
+
+@media only screen 
+	and (min-device-width: 900px)
+	and (max-device-width: 1200px) {
+		.k8em0 {
+			width: 600px;
+			height: 600px;
+			background: url(k8em0.jpg) 0px 600px;
+		}
+	}
+
+@media only screen 
+	and (min-device-width: 600px)
+	and (max-device-width: 900px) {
+		.k8em0 {
+			width: 600px;
+			height: 600px;
+			background: url(k8em0.jpg) 600px 0px;
+		}
+	}
+@media only screen
+	and (max-device-width: 600px) {
+		.k8em0 {
+			width: 600px;
+			height: 600px;
+			background: url(k8em0.jpg) 600px 600px;
+		}
+	}
