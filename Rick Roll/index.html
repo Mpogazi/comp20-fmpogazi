@@ -41,8 +41,6 @@
 	"Never gonna tell a lie and hurt you",
 	];
 
-	intro_time = [20.64, 26.9, 30.5];
-
 	var video = document.getElementById('rickroll');
 	var caption = document.getElementById('lyrics');
 	video.addEventListener("timeupdate", function() {
@@ -109,7 +107,6 @@
 			caption.innerHTML = chorus[4];
 		} else if(time < 118.9 && time > 115.3) {
 			caption.innerHTML = chorus[5];
-		// Lord I wanna know you more	
 		} else if(time < 123.0 && time > 122.0) {
 			caption.innerHTML = "Ooh, Give you up";
 		} else if(time < 127.4 && time > 123.2) {
