@@ -13,6 +13,7 @@
 <video src="https://www.cs.tufts.edu/comp/20/rickroll.mp4" id="rickroll" controls></video>
 <div id="lyrics"></div>
 <script>
+	// Array of lyrics lines
 	lyrics = [
 	"We are no strangers to love",
 	"You know the rules and so do I",
@@ -22,6 +23,7 @@
 	"Gotta make you understand"
 	];
 
+	// Array of second paragraph lyrics
 	lyrics2 = [
 	"We've known each other for so long",
 	"Your heart's been aching, but",
@@ -32,6 +34,7 @@
 	"Don't tell me you're too blind to see"
 	];
 
+	// Array of chorus lines
 	chorus = [
 	"Never gonna give you up",
 	"Never gonna let you down",
@@ -41,8 +44,11 @@
 	"Never gonna tell a lie and hurt you",
 	];
 
+	// HTML entities to use
 	var video = document.getElementById('rickroll');
 	var caption = document.getElementById('lyrics');
+
+	// JS block to add event and time the song
 	video.addEventListener("timeupdate", function() {
 		time = video.currentTime;
 		if(time < 20.64 && time > 18.0) {
