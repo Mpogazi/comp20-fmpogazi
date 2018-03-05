@@ -1,35 +1,70 @@
 <!DOCTYPE html>
 <html>
-	<head>
-	    <title>Geolocation</title>
-	    <meta name="viewport" content="initial-scale=1.0">
-	    <meta charset="utf-8">
-	    <link rel="stylesheet" type="text/css" href="geo.css">
-  	</head>
-  	<body onload="getMyLocation()">
-    	<div id="map"></div>
-    	<script>
-    		myLat = 0;
-    		myLng = 0;
-    		function getMyLocation() {
-    			navigator.geolocation.getCurrentPosition(gotLocation);
-    		}
+  <head>
+    <title>Geo location</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="geo.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMRP5SaFRbpQCi1QsjdLpLoxthpVZX_fA"
+    async></script>
+    <script type="text/javascript">
+      var myLat = 42;
+      var myLng = -75;
+      var myLocation;
+      var mapOptions;
+      var map;
+      var marker;
+      var infowindow;
+      
+      // Init function for the map
+      function initMap() {
+      myLocation = new google.maps.LatLng(myLat, myLng);
+      mapOptions = {
+          center: myLocation,
+          zoom: 14,
+          mapTypeId:google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        getMyLocation();
+      }
 
-    		function gotLocation(position) {
-    			myLat = position.coords.latitude;
-    			myLng = position.coords.longitude;
-    			console.log(myLat);
-    			console.log(myLng);
-    		}
+      // Retrieve My Location
+      function getMyLocation() {
+        if(navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+              myLat = position.coords.latitude;
+              myLng = position.coords.longitude;
+              renderMap();
+          });
+        }
+      }
 
-      		var map;
-      		function initMap() { 
-      			map = new google.maps.Map(document.getElementById('map'), { 
-      				center: {lat: myLat, lng: myLng},
-          		zoom: 8 
-          		});
-      		}
-    	</script>
-    	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0ga2SJ-EKTLD4sJsKN0RnFBt-BMCw8Zo&callback=initMap"></script>
-    </body>
+      // Drawing the map with location markers
+      function renderMap() {
+        myLocation = new google.maps.LatLng(myLat, myLng);
+        // Update map and go there...
+        map.panTo(myLocation);
+
+        // Creating a marker
+        marker = new google.maps.Marker({
+          position: myLocation,
+          title: "Man's there"
+        });
+        marker.setMap(map);
+        // Open info window on click of marker
+        infowindow = new google.maps.InfoWindow();
+
+        // add event listener
+        google.maps.event.addListener(marker, 'click', function() {
+            infowindow.setContent(marker.title);
+            infowindow.open(map, marker);
+        });
+
+      }
+      
+    </script>
+  </head>
+  <body onload="initMap()">
+    <div id="map"></div>
+  </body>
 </html>
