@@ -8,14 +8,16 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMRP5SaFRbpQCi1QsjdLpLoxthpVZX_fA"
     async></script>
     <script type="text/javascript">
-      var myLat = 42;
-      var myLng = -75;
+      var myLat = 0;
+      var myLng = 0;
       var myLocation;
       var mapOptions;
       var map;
       var marker;
       var infowindow;
       var hxr;
+      var driverIcon = "driver_icon.png";
+      var passengerIcon = "jumbo_passenger.png";
       
       // Init function for the map
       function initMap() {
@@ -27,7 +29,6 @@
         };
         map = new google.maps.Map(document.getElementById('map'), mapOptions);
         getMyLocation();
-        sendHttpRequest();
       }
 
       // Retrieve My Location
@@ -43,6 +44,7 @@
 
       // Drawing the map with location markers
       function renderMap() {
+
         myLocation = new google.maps.LatLng(myLat, myLng);
         // Update map and go there...
         map.panTo(myLocation);
@@ -50,7 +52,8 @@
         // Creating a marker
         marker = new google.maps.Marker({
           position: myLocation,
-          title: "Man's there"
+          icon: driverIcon,
+          title: "DsRILKPCEf "+myLat+"  "+myLng
         });
         marker.setMap(map);
         // Open info window on click of marker
@@ -62,6 +65,7 @@
             infowindow.open(map, marker);
         });
 
+        sendHttpRequest();
       }
 
       function sendHttpRequest() {
@@ -74,9 +78,23 @@
         hxr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         hxr.onreadystatechange = function() {
           if(hxr.readyState == 4 && hxr.status == 200) {
-            console.log(hxr.responseText);
-          } else {
-            console.log("My request crapping " + hxr.readyState);
+
+            var responseJSON = JSON.parse(hxr.responseText);
+            for (var i = 0; i < responseJSON.passengers.length; i++) {
+              var markerLoc = new google.maps.LatLng(responseJSON.passengers[i].lat, responseJSON.passengers[i].lng);
+              marker = new google.maps.Marker({
+                position: markerLoc,
+                title: responseJSON.passengers[i].username+" "+responseJSON.passengers[i].lat+" "+responseJSON.passengers[i].lng 
+              });
+              marker.setMap(map);
+              var infoMarker = new google.maps.InfoWindow();
+
+              google.maps.event.addListener(marker, 'click', function() {
+                infoMarker.setContent(marker.title);
+                infoMarker.open(map, marker);
+              });
+
+            }
           }
         }
 
