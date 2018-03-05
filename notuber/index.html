@@ -15,6 +15,7 @@
       var map;
       var marker;
       var infowindow;
+      var hxr;
       
       // Init function for the map
       function initMap() {
@@ -26,6 +27,7 @@
         };
         map = new google.maps.Map(document.getElementById('map'), mapOptions);
         getMyLocation();
+        sendHttpRequest();
       }
 
       // Retrieve My Location
@@ -60,6 +62,25 @@
             infowindow.open(map, marker);
         });
 
+      }
+
+      function sendHttpRequest() {
+        hxr = new XMLHttpRequest();
+        var url = "https://jordan-marsh.herokuapp.com/rides";
+        var params = "username=DsRILKPCEf&lat="+myLat+"&lng="+myLng;
+        hxr.open('POST', url, true);
+
+        // Headers
+        hxr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        hxr.onreadystatechange = function() {
+          if(hxr.readyState == 4 && hxr.status == 200) {
+            console.log(hxr.responseText);
+          } else {
+            console.log("My request crapping " + hxr.readyState);
+          }
+        }
+
+        hxr.send(params);
       }
       
     </script>
