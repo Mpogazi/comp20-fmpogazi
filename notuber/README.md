@@ -1,5 +1,9 @@
 * notuber homework
 
+* Implemented the call from javascript
+* google map api.
+
+
 * The map part of the homework has
 * been implemented. The navigator, 
 * the httpRequests also have been 
@@ -7,16 +11,14 @@
 * calculated the distance from me
 * has been implemented too. 
 * Every marker has also an info window
-* that calculates the distances from 
-* me.
-* However, I was not able to implement
-* the info window pointing at me that 
-* shows the shortest distance from me.
-* The Major reason for this is that 
-* I was able to return an array 
-* containing the shortest distance
-* but could not access it with 
-* javascript methods.
+* I used an array to calculate the shortest
+* distance from me. 
+* the function uses a push and pop to make sure
+* that only the minimum of the distances gets into 
+* the array.
 
 
-* ___Implemented by Fabrice Bigabiro Mpogazi
+
+
+
+* __Implemented by Fabrice Bigabiro Mpogazi
