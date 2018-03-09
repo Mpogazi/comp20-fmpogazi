@@ -1,8 +1,9 @@
+"use strict";
 var myLat = 0;
 var myLng = 0;
-var myLocation = new google.maps.LatLng(myLat, myLng);
+var myLocation = google.maps.LatLng(myLat, myLng);
 var options = {
-    zoom: 12,
+    zoom: 13,
     center: myLocation,
     mapTypeId: google.maps.MapTypeId.ROADMAP
 };
@@ -23,6 +24,7 @@ function getMyLocation() {
             myLng = position.coords.longitude;
             requestData();
             renderMap();
+            
         });
     }
 }
@@ -31,13 +33,21 @@ function renderMap() {
     myLocation = new google.maps.LatLng(myLat, myLng);
     map.panTo(myLocation);
     var meIcon;
-    meIcon = "rick_pass.png";
-    console.log(distanceFromMe);
-    makeMarker(myLocation, meIcon, map, Math.min(...distanceFromMe), "DsRILKPCEf");
+    meIcon = "jerry.png";
+    var markMe = new google.maps.Marker({
+        position: myLocation,
+        title: "Here is me",
+        icon: meIcon
+    });
+    markMe.setMap(map);
+    google.maps.event.addListener(markMe, 'click', function() {
+        infowindow.setContent("short distance from me: ");
+        infowindow.open(map, markMe);
+    });
 }
 
 function requestData() {
-    hxr = new XMLHttpRequest;
+    hxr = new XMLHttpRequest();
     var url = "https://jordan-marsh.herokuapp.com/rides";
     var params = "username=DsRILKPCEf&lat="+myLat+"&lng="+myLng;
     
@@ -54,16 +64,24 @@ function requestData() {
             if(arrayM == 'passengers') {
                 icons = "jumbo_passenger.png";
             }
+            var minimum = 13000;
             for(var i = 0; i < arrayM.length; i++) {
                 var folkLocation = new google.maps.LatLng(arrayM[i].lat, arrayM[i].lng);
                 var distancePerson = google.maps.geometry.spherical.computeDistanceBetween(folkLocation, myLocation) * 0.000621371;
-                distanceFromMe.push(distancePerson);
+                if(distancePerson < minimum) {
+                    if(distanceFromMe.length == 0) {
+                        distanceFromMe.push(distancePerson);
+                    } else {
+                        distanceFromMe.pop();
+                        distanceFromMe.push(distancePerson);
+                    }
+                    minimum = distancePerson;
+                }
                 makeMarker(folkLocation, icons, map, distancePerson, arrayM[i].username);                
             }
         }
     }
     hxr.send(params);
-    
 }
 
 function makeMarker(place, icon, map, distance, uname) {
