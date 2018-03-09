@@ -23,27 +23,9 @@ function getMyLocation() {
             myLat = position.coords.latitude;
             myLng = position.coords.longitude;
             requestData();
-            renderMap();
             
         });
     }
-}
-
-function renderMap() {
-    myLocation = new google.maps.LatLng(myLat, myLng);
-    map.panTo(myLocation);
-    var meIcon;
-    meIcon = "jerry.png";
-    var markMe = new google.maps.Marker({
-        position: myLocation,
-        title: "Me: DsRILKPCEf",
-        icon: meIcon
-    });
-    markMe.setMap(map);
-    google.maps.event.addListener(markMe, 'click', function() {
-        infowindow.setContent("DsRILKPCEf");
-        infowindow.open(map, markMe);
-    });
 }
 
 function requestData() {
@@ -82,6 +64,24 @@ function requestData() {
         }
     }
     hxr.send(params);
+    myLocation = new google.maps.LatLng(myLat, myLng);
+    map.panTo(myLocation);
+    var meIcon;
+    meIcon = "jerry.png";
+    var markMe = new google.maps.Marker({
+        position: myLocation,
+        title: "Me: DsRILKPCEf",
+        icon: meIcon
+    });
+    markMe.setMap(map);
+    google.maps.event.addListener(markMe, 'click', function() {
+        if(distanceFromMe.length === 0) {
+            infowindow.setContent("DsRILKPCEf" + "Nobody is online");
+        } else {
+            infowindow.setContent("DsRILKPCEf" + " shortest distance: " + distanceFromMe[0]);
+        }
+        infowindow.open(map, markMe);
+    });
 }
 
 function makeMarker(place, icon, map, distance, uname) {
