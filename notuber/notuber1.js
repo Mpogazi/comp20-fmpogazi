@@ -36,12 +36,12 @@ function renderMap() {
     meIcon = "jerry.png";
     var markMe = new google.maps.Marker({
         position: myLocation,
-        title: "Here is me",
+        title: "Me: DsRILKPCEf",
         icon: meIcon
     });
     markMe.setMap(map);
     google.maps.event.addListener(markMe, 'click', function() {
-        infowindow.setContent("short distance from me: ");
+        infowindow.setContent("DsRILKPCEf");
         infowindow.open(map, markMe);
     });
 }
