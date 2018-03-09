@@ -88,7 +88,7 @@ function makeMarker(place, icon, map, distance, uname) {
     var markerM = new google.maps.Marker({
         position: place,
         icon: icon,
-        title: "username: "+uname+" </br>"+distance+"  miles from Me"
+        title: "username: "+uname+"</br>"+distance+"  miles from Me"
     });
     markerM.setMap(map);
     google.maps.event.addListener(markerM, 'click', function() {
