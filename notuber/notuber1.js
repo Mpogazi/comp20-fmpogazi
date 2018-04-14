@@ -30,7 +30,7 @@ function getMyLocation() {
 
 function requestData() {
     hxr = new XMLHttpRequest();
-    var url = "https://jordan-marsh.herokuapp.com/rides";
+    var url = "https://fierce-plains-63402.herokuapp.com/rides";
     var params = "username=DsRILKPCEf&lat="+myLat+"&lng="+myLng;
     
     hxr.open('POST', url, true);
