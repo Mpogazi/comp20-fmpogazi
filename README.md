@@ -21,3 +21,5 @@
 - Networking (Computer Networking)
 - CyberSecurity and Privacy
 - Web frameworks development
+- HTTPS, SSL certificates
+- Encryption for security purposes
