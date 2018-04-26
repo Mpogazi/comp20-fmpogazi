@@ -15,20 +15,33 @@
 	<div>
 		<h1>Methodology: </h1>
 		<p>
-			Use of Curl to send data to the application
+			Use of Curl to send data to the application.
+			Use of username[$ne]=something in a Query.
 		</p>
 	</div>
 	<div>
 		<h1>Abstract of Findings: </h1>
 		<p>
 			Vulnerable to XSS.
+			MongoDB Injection
+			
 		</p>
 	</div>
 	<div>
 		<h1>Issues Found: </h1>
 		<p>
-			Due to unsanitazed input this application can accept Javascript and this is a 
+			UNSANITAZED INPUT: Due to unsanitazed input this application can accept Javascript and this is a 
 			vulnerability that can lead an attacker taking advantage of the application.
+			SEVERITY: MEDIUM
+			REASON: This vulnerability can lead to a db being highjacked or worse depending on the kind of script that the attacker uses.
+
+			MONGODB INJECTION: MongoDB injections can work on this application resulting in the 
+			server sending back to the attacker nearly all the information 
+			stored in the db. The injection returns an associative array of all 
+			elements that are in the db.
+			SEVERITY: HIGH
+			REASON: This vulnerability, if present in production, can lead to 
+			a leak of information of millions stored in the db.
 
 		</p>
 	</div>
