@@ -24,6 +24,8 @@
 		<p>
 			Vulnerable to XSS.
 			MongoDB Injection
+			No latest MongoDb
+			App has internal server error
 			
 		</p>
 	</div>
@@ -42,19 +44,27 @@
 			SEVERITY: HIGH
 			REASON: This vulnerability, if present in production, can lead to 
 			a leak of information of millions stored in the db.
+			
+			NO LATEST MONGODB: This program does not use the latest mongodb. The old ones are vulnerable to Denial of Service 
+			attack. 
+			SEVERITY: HIGH
+			
+			INTERNAL SERVER ERROR: The program shows an internal server error when not run locally. So basically the app can only run
+			locally.
 
 		</p>
 	</div>
 	<div>
 		<h1>Conclusion: </h1>
 		<p>
-			
+			The programmer should use the latest version of the libraries and frameworks to allow fixes that took place to be into the app.
+			However using the latest version of the application comes with the cost of needing to change the code base for compatibility.
 		</p>
 	</div>
 	<div>
 		<h1>References: </h1>
 		<p>
-			
+			<a href="https://snyk.io/vuln/npm:fresh:20170908">Issues with Express</a>
 		</p>
 	</div>
 </body>
